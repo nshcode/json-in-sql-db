@@ -16,15 +16,15 @@ FROM laureates,
       ,died_in        VARCHAR2 PATH  '$.diedCountry'
       ,NESTED PATH '$.prizes[*]'
             COLUMNS (
-              category VARCHAR2 PATH '$.category'
-              ,year    INTEGER  PATH  '$.year'
+              category    VARCHAR2 PATH '$.category'
+              ,year       INTEGER  PATH  '$.year'
+              ,motivation VARCHAR2 PATH '$.motivation'
               ,NESTED PATH          '$.affiliations[*]'
                     COLUMNS (
-                      affiliation         VARCHAR2 PATH '$.name'
-                      ,affiliation_city   VARCHAR2 PATH '$.city'
-                      ,affiliation_country VARCHAR2 PATH '$.city'
+                      affiliation         VARCHAR2  PATH '$.name'
+                      ,affiliation_city   VARCHAR2  PATH '$.city'
+                      ,affiliation_country VARCHAR2 PATH '$.country'
                     )
-              ,motivation VARCHAR2 PATH '$.motivation'
             )
     )
 ) j
