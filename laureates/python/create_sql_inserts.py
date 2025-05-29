@@ -2,8 +2,8 @@ import json
 import re
 
 home   = 'C:\Projects\json-in-sql-db'
-srcFn  = 'laureates\laureates.json'
-distFn = 'laureates\insert_laureates.sql'
+srcFn  = home + '\\' + 'laureates\\raw-data\\laureates.json'
+distFn = home + '\\' +  'laureates\\insert_laureates.sql'
 
 
 def is_valid_json(s):
@@ -61,12 +61,12 @@ def create_sql_inserts(laureates, fn):
         f.write("COMMIT;\n")
 
 
-with open(home + '\\' + srcFn, 'r', encoding='utf-8') as f:
+with open(srcFn, 'r', encoding='utf-8') as f:
     laureates = json.load(f)
 
 cleaned_laureates = clean(laureates)
 (valid_laureates, invalid_laureates) = check_validity(cleaned_laureates)
-create_sql_inserts(valid_laureates, home + '\\' + distFn)
+create_sql_inserts(valid_laureates, distFn)
 
 print('#valid laureates: ', len(valid_laureates))
 print('#invalid laureates: ', len(invalid_laureates))
